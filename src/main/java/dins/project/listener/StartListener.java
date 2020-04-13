@@ -1,8 +1,8 @@
 package dins.project.listener;
 
 import dins.project.service.LimitService;
+import dins.project.service.PacketService;
 import dins.project.service.SparkService;
-import dins.project.service.impl.Spark;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class StartListener implements ApplicationListener<ApplicationReadyEvent> {
 
+    private final PacketService packetService;
     private final SparkService sparkService;
-    private final Spark spark;
     private final LimitService limitService;
 
     @Override
@@ -23,7 +23,7 @@ public class StartListener implements ApplicationListener<ApplicationReadyEvent>
         limitService.updateValues();
 
         try {
-            sparkService.startTrafficControl();
+            packetService.startTrafficControl();
 //            spark.execute();
         } catch (Exception e) {
             log.error("The problem occurred: {}", e.getMessage());

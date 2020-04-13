@@ -3,7 +3,7 @@ package dins.project.service.impl;
 import dins.project.model.AlertMessage;
 import dins.project.service.KafkaService;
 import dins.project.service.LimitService;
-import dins.project.service.SparkService;
+import dins.project.service.PacketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,11 +18,11 @@ public class ScheduleServiceImpl {
 
     private final KafkaService kafkaService;
     private final LimitService limitService;
-    private final SparkService sparkService;
+    private final PacketService packetService;
 
-    @Scheduled(fixedRate = 5 * 1000)
+    @Scheduled(fixedRate = 5 * 60 * 1000)
     public void executeCounterCheck() {
-        long value = sparkService.resetTrafficCounter(0L);
+        long value = packetService.resetTrafficCounter(0L);
         AlertMessage message = new AlertMessage().setTime(Instant.now()).setTrafficValue(value);
         if (value > limitService.getMax()) {
             message.setAbove(true)
