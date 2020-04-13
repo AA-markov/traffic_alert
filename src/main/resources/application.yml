@@ -1,0 +1,29 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    host: localhost
+    port: 5432
+    dbname: traffic_control
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.dbname}
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog.yml
+spark:
+  ip: default
+  app-name: Traffic_Control
+  master: local[3]
+  packet:
+    snapshot_bytes: 65536
+    timeout: 50
+    period: 5000

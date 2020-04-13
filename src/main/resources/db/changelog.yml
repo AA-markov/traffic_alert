@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2020_04_11_001
+      author: Andrey Markov
+      changes:
+        - sqlFile:
+            path: ./001_initial_schema.sql
+            encoding: utf8
+            relativeToChangelogFile: true
