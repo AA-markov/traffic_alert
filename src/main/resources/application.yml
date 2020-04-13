@@ -5,7 +5,7 @@ spring:
   datasource:
     host: localhost
     port: 5432
-    dbname: traffic_control
+    dbname: traff
     url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.dbname}
     username: postgres
     password: postgres
@@ -22,7 +22,7 @@ spring:
 spark:
   ip: default
   app-name: TrafficAlert
-  master: local
+  master: local[1]
   packet:
     snapshot_bytes: 65536
     timeout: 50

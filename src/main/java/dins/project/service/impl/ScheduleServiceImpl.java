@@ -20,7 +20,7 @@ public class ScheduleServiceImpl {
     private final LimitService limitService;
     private final PacketService packetService;
 
-    @Scheduled(fixedRate = 5 * 60 * 1000)
+    @Scheduled(fixedRate = 5 * 1000)
     public void executeCounterCheck() {
         long value = packetService.resetTrafficCounter(0L);
         AlertMessage message = new AlertMessage().setTime(Instant.now()).setTrafficValue(value);

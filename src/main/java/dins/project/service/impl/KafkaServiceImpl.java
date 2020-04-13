@@ -12,8 +12,8 @@ public class KafkaServiceImpl implements KafkaService {
 
     private static final String ALERT_TOPIC = "alerts";
     private static final String MESSAGE_TOPIC = "numbers";
-    private final KafkaTemplate<String, AlertMessage> kafkaAlertTemplate;
-    private final KafkaTemplate<String, Long> kafkaNumberTemplate;
+    private final KafkaTemplate kafkaAlertTemplate;
+    private final KafkaTemplate kafkaNumberTemplate;
 
     @Override
     public void sendToKafka(AlertMessage message) {
