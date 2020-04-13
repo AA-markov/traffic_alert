@@ -35,6 +35,16 @@ public class LimitServiceImpl implements LimitService {
         return limitRepository.getLatestValue(type);
     }
 
+    @Override
+    public long getMax() {
+        return maxLimit;
+    }
+
+    @Override
+    public long getMin() {
+        return minLimit;
+    }
+
     private Long getLatest(LimitType type) {
         return limitRepository.getLatestValue(type).getValue();
     }
@@ -46,15 +56,5 @@ public class LimitServiceImpl implements LimitService {
         }
         else isAcceptable = value > 0 && value > minLimit;
         return isAcceptable;
-    }
-
-    @Override
-    public long getMax() {
-        return maxLimit;
-    }
-
-    @Override
-    public long getMin() {
-        return minLimit;
     }
 }

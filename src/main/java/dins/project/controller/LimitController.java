@@ -31,8 +31,7 @@ public class LimitController {
     public ResponseEntity<String> setLimit(@RequestBody Limit limit) {
         if (limitService.addLimit(limit.getType(), limit.getValue())) {
             return new ResponseEntity<>("Limit updated.", HttpStatus.OK);
-        }
-        else {
+        } else {
             return new ResponseEntity<>("Limit update failed. Try again.", HttpStatus.BAD_REQUEST);
         }
     }

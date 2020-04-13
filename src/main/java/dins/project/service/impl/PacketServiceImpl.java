@@ -20,18 +20,12 @@ import java.util.concurrent.atomic.AtomicLong;
 @Setter
 public class PacketServiceImpl implements PacketService {
 
-    private final JavaSparkContext sparkContext;
-    private final KafkaService kafkaService;
-
     private AtomicLong counter = new AtomicLong(0);
-    private List<Packet> packets;
 
     @Value("${spark.packet.snapshot_bytes}")
     private int snapshotLengthBytes;
     @Value("${spark.packet.timeout}")
     private int readTimeoutMillis;
-    @Value("${spark.packet.period}")
-    private int period;
     @Value("${spark.ip}")
     private String setIp;
 
@@ -44,7 +38,7 @@ public class PacketServiceImpl implements PacketService {
          * nor in serializing Longs to kafka (and back).
          * Therefore, I left Spark-directed listener commented.
          * Now application works well, but it is not Spark-driven though.
-        */
+         */
 //        PacketListener listener = packet -> kafkaService.sendNumbers(packet.getRawData().length);
 
         PacketListener listener = packet -> counter.addAndGet(packet.getRawData().length);

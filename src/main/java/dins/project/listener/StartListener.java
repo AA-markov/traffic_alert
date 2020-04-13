@@ -24,7 +24,7 @@ public class StartListener implements ApplicationListener<ApplicationReadyEvent>
 
         try {
             packetService.startTrafficControl();
-//            spark.execute();
+//            sparkService.readFromKafka();
         } catch (Exception e) {
             log.error("The problem occurred: {}", e.getMessage());
         }

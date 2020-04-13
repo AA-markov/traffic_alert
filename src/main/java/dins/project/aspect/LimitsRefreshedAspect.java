@@ -1,6 +1,5 @@
 package dins.project.aspect;
 
-import dins.project.repository.LimitRepository;
 import dins.project.service.LimitService;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.annotation.After;
@@ -13,14 +12,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class LimitsRefreshedAspect {
 
-    private final LimitRepository limitRepository;
     private final LimitService limitService;
 
     @Pointcut("execution(* dins.project.repository.LimitRepository.addLimit(..))")
-    private void limitRefesh() {
+    private void limitRefresh() {
     }
 
-    @After("limitRefesh()")
+    @After("limitRefresh()")
     private void updateLimits() {
         limitService.updateValues();
     }
