@@ -40,16 +40,6 @@ public class KafkaConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, AlertMessage> consumerFactory() {
-        Map<String, Object> properties = new HashMap<>();
-        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
-        properties.put(ConsumerConfig.GROUP_ID_CONFIG, "group");
-        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        return new DefaultKafkaConsumerFactory<>(properties);
-    }
-
-    @Bean
     public KafkaTemplate<String, AlertMessage> kafkaAlertTemplate() {
         return new KafkaTemplate<>(alertProducerFactory());
     }
@@ -57,12 +47,5 @@ public class KafkaConfig {
     @Bean
     public KafkaTemplate<String, Long> kafkaNumberTemplate() {
         return new KafkaTemplate<>(numberProducerFactory());
-    }
-
-    @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, AlertMessage>> listener() {
-        ConcurrentKafkaListenerContainerFactory<String, AlertMessage> listener = new ConcurrentKafkaListenerContainerFactory<>();
-        listener.setConsumerFactory(consumerFactory());
-        return listener;
     }
 }
