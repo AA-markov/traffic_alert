@@ -50,7 +50,7 @@ public class LimitServiceImpl implements LimitService {
     }
 
     private boolean isValueAcceptable(LimitType type, Long value) {
-        boolean isAcceptable = false;
+        boolean isAcceptable;
         if (type == LimitType.MIN) {
             isAcceptable = value > 0 && value < maxLimit;
         }
